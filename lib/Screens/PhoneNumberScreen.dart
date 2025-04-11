@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:japx/japx.dart';
 
-import 'package:fliq_dating_app/Api/ApiResponce.dart';
 import 'package:fliq_dating_app/Screens/OtpVerficatnsScreen.dart';
 import 'package:fliq_dating_app/Utilities/TostMessege.dart';
 
