@@ -12,7 +12,7 @@ class OtpVerifictinScren extends StatelessWidget {
   OtpVerifictinScren({required this.phone});
 
   Future<void> verifyOtp(BuildContext context) async {
-    final otp = otpController.text.trim();
+    final otp = otpController.text;
 
     final requestBody = {
       'data': {
@@ -48,7 +48,7 @@ class OtpVerifictinScren extends StatelessWidget {
 
       if (response.statusCode == 200 || response.statusCode == 201) {
         final decoded = json.decode(response.body);
-        print("OTP Sent: ${decoded['message']}");
+        print("${decoded['message']}");
         Navigator.of(
           context,
         ).push(MaterialPageRoute(builder: (context) => Chatscreeen()));

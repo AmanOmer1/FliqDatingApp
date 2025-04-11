@@ -1,4 +1,5 @@
 import 'package:fliq_dating_app/Api/ApiRequest.dart';
+import 'package:fliq_dating_app/Screens/ChatScreeen.dart';
 import 'package:fliq_dating_app/Screens/OtpVerficatnsScreen.dart';
 import 'package:fliq_dating_app/Screens/PhoneNumberScreen.dart';
 import 'package:fliq_dating_app/Screens/SpalshScreen.dart';
@@ -13,6 +14,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(theme: ThemeData.dark(), home: Splashscreen());
+    return MaterialApp(theme: ThemeData.dark(), home: Chatscreeen());
   }
 }
