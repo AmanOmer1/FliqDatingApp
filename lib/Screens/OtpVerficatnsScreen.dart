@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:japx/japx.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class OtpVerifictinScren extends StatelessWidget {
   final TextEditingController otpController = TextEditingController();
@@ -35,7 +36,7 @@ class OtpVerifictinScren extends StatelessWidget {
     };
 
     try {
-      final response = await http.post(
+      final responseForOtp = await http.post(
         Uri.parse(
           'https://test.myfliqapp.com/api/v1/auth/registration-otp-codes/actions/phone/verify-otp',
         ),
@@ -46,8 +47,18 @@ class OtpVerifictinScren extends StatelessWidget {
         body: json.encode(requestBody),
       );
 
-      if (response.statusCode == 200 || response.statusCode == 201) {
-        final decoded = json.decode(response.body);
+      if (responseForOtp.statusCode == 200 ||
+          responseForOtp.statusCode == 201) {
+        final decoded = json.decode(responseForOtp.body);
+        final token =
+            decoded['data']['attributes']['auth_status']['access_token'];
+
+        final prefs = await SharedPreferences.getInstance();
+        await prefs.setString('auth_token', token);
+        print('test========token');
+        print(token);
+        print('test=======token');
+
         print("${decoded['message']}");
         Navigator.of(
           context,

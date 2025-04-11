@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:japx/japx.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Chatscreeen extends StatefulWidget {
   const Chatscreeen({super.key});
@@ -21,11 +22,16 @@ class _ChatscreeenState extends State<Chatscreeen> {
   }
 
   Future<void> chatScreenUsersFetching() async {
+    final prefs = await SharedPreferences.getInstance();
+    final token = prefs.getString('auth_token') ?? '';
     final fetchedResponse = await http.get(
       Uri.parse(
         'https://test.myfliqapp.com/api/v1/chat/chat-messages/queries/contact-users',
       ),
-      headers: {'Accept': 'application/vnd.api+json'},
+      headers: {
+        'Accept': 'application/vnd.api+json',
+        'Authorization': 'Bearer $token',
+      },
     );
     print('test=================0');
     print(fetchedResponse);
@@ -102,9 +108,13 @@ class _ChatscreeenState extends State<Chatscreeen> {
                 child: ListView.builder(
                   itemCount: contactUser.length,
                   itemBuilder: (context, index) {
-                    final user = contactUser[index]['attributes'];
-                    final imageURL = user['profile_photo_url'] ?? '';
-                    final name = user['name'] ?? 'NoName';
+                    final data = contactUser[index];
+                    final user = data?['attributes'];
+
+                    final imageURL =
+                        user != null ? user['profile_photo_url'] ?? '' : '';
+                    final name =
+                        user != null ? user['name'] ?? 'NoName' : 'Unknown';
 
                     return ListTile(
                       leading: CircleAvatar(
@@ -112,12 +122,16 @@ class _ChatscreeenState extends State<Chatscreeen> {
                             imageURL.isNotEmpty
                                 ? NetworkImage(imageURL)
                                 : AssetImage(
-                                  'lib/assets/images/assetsplash.jpg',
-                                ),
+                                      'lib/assets/images/assetsplash.jpg',
+                                    )
+                                    as ImageProvider,
                       ),
                       title: Text(
                         name,
-                        style: TextStyle(fontWeight: FontWeight.w600),
+                        style: TextStyle(
+                          fontWeight: FontWeight.w600,
+                          color: Colors.black,
+                        ),
                       ),
                       onTap: () {},
                     );
