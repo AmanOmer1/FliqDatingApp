@@ -18,7 +18,7 @@ class _SplashscreenState extends State<Splashscreen> {
           Container(
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: AssetImage('lib/assets/images/assetsplash.jpg'),
+                image: AssetImage('lib/assets/images/fliqloginimage.jpg'),
                 fit: BoxFit.cover,
               ),
             ),

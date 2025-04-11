@@ -42,9 +42,17 @@ class _ChatscreeenState extends State<Chatscreeen> {
       print('test============2');
       print(jsonDecoded);
       print('test=====================3');
-      setState(() {
-        contactUser = jsonDecoded['data'];
-      });
+      if (jsonDecoded != null && jsonDecoded['data'] is List) {
+        setState(() {
+          contactUser = jsonDecoded['data'];
+          print('test========4');
+          print('Contact User List: $contactUser');
+        });
+      } else {
+        print(
+          "Error: 'data' key not found or is not a List in the API response.",
+        );
+      }
     } else {
       print("Failed , Error=========, Api");
     }
@@ -108,13 +116,11 @@ class _ChatscreeenState extends State<Chatscreeen> {
                 child: ListView.builder(
                   itemCount: contactUser.length,
                   itemBuilder: (context, index) {
-                    final data = contactUser[index];
-                    final user = data?['attributes'];
+                    final user =
+                        contactUser[index]; // Directly access the user Map
 
-                    final imageURL =
-                        user != null ? user['profile_photo_url'] ?? '' : '';
-                    final name =
-                        user != null ? user['name'] ?? 'NoName' : 'Unknown';
+                    final imageURL = user['square100_profile_photo_url'] ?? '';
+                    final name = user['name'] ?? 'Unknown';
 
                     return ListTile(
                       leading: CircleAvatar(

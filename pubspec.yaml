@@ -72,6 +72,7 @@ flutter:
   assets:
     - lib/assets/images/assetsplash.jpg
     - lib/assets/images/googlelogo.png
+    - lib/assets/images/fliqloginimage.jpg
   
 
   # An image asset can refer to one or more resolution-specific "variants", see

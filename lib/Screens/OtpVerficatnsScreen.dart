@@ -49,17 +49,17 @@ class OtpVerifictinScren extends StatelessWidget {
 
       if (responseForOtp.statusCode == 200 ||
           responseForOtp.statusCode == 201) {
-        final decoded = json.decode(responseForOtp.body);
+        final decodedForOtpVrfctn = json.decode(responseForOtp.body);
         final token =
-            decoded['data']['attributes']['auth_status']['access_token'];
+            decodedForOtpVrfctn['data']['attributes']['auth_status']['access_token'];
 
         final prefs = await SharedPreferences.getInstance();
         await prefs.setString('auth_token', token);
-        print('test========token');
+        print('test========token1');
         print(token);
-        print('test=======token');
+        print('test=======token2');
 
-        print("${decoded['message']}");
+        print("${decodedForOtpVrfctn['message']}");
         Navigator.of(
           context,
         ).push(MaterialPageRoute(builder: (context) => Chatscreeen()));

@@ -1,6 +1,3 @@
-import 'package:fliq_dating_app/Screens/ChatScreeen.dart';
-import 'package:fliq_dating_app/Screens/OtpVerficatnsScreen.dart';
-import 'package:fliq_dating_app/Screens/PhoneNumberScreen.dart';
 import 'package:fliq_dating_app/Screens/SpalshScreen.dart';
 import 'package:flutter/material.dart';
 
